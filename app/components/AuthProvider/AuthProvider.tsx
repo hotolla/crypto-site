@@ -8,7 +8,7 @@ import { Types } from './types';
 
 export interface ILoginPayload {
   user: IUser,
-  token: string
+  token: string | null
 }
 
 interface IAuthProviderValues extends IAuthState {
@@ -38,7 +38,8 @@ export const AuthProvider = ({ children } : PropsWithChildren) => {
   });
 
   const login = (payload: ILoginPayload) => {
-    dispatch({ type: Types.Login, payload: payload.user });
+    console.log(payload)
+    dispatch({ type: Types.Login, payload: payload,  });
   };
 
   const logout = () => {

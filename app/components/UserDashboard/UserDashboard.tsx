@@ -36,7 +36,7 @@ const schema = Yup.object({
   soldCurrency: Yup.string().nullable().required()
 });
 
-export const UserDashbord = () => {
+export const UserDashboard = () => {
   const [ isError, setIsError ] = useState(false);
   const router = useRouter();
   const form = useForm({

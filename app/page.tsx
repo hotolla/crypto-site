@@ -1,95 +1,61 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client"
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+import { useCallback, useEffect, useState } from 'react';
+import i18next from 'i18next';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { Layout } from '@/app/components/Layout';
+import { AuthProvider } from '../app/components/AuthProvider';
+import { SessionProviders } from '@/app/components/SessionProviders';
+import { PrivateRoute } from "@/app/modules/auth";
+import { darkTheme, lightTheme } from "@/app/themes/themes";
+import createEmotionCache from "@/app/themes/createEmotionCache";
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+const clientSideEmotionCache = createEmotionCache();
+const isDarkThemeKey = 'isDarkTheme';
+let item = false;
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+export default function Home ()   {
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
+  const [ isDarkTheme, setIsDarkTheme ] = useState(item);
+  const [ locale, setLocale ] = useState(i18next.language);
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+  const handleChangeTheme = useCallback(() => {
+    setIsDarkTheme((isDarkTheme) => {
+      if (typeof window !== 'undefined') localStorage.setItem(isDarkThemeKey, `${isDarkTheme}`);
+
+      return !isDarkTheme;
+    });
+  }, []);
+
+  useEffect(() => {
+    item = localStorage.getItem(isDarkThemeKey) === 'false';
+    // const handleLanguageChange = () => {
+    //   setLocale(i18next.language);
+    // };
+    //
+    // i18next.on('languageChanged', handleLanguageChange);
+
+    // return () => {
+    //   i18next.off('languageChanged', handleLanguageChange);
+    // };
+  }, []);
+  return  (
+    // <CacheProvider value={emotionCache}>
+    <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+      <CssBaseline />
+
+      <LocalizationProvider adapterLocale={locale}>
+          {/*<PrivateRoute>*/}
+          {/*<SessionProviders>*/}
+          {/*  <Layout isDarkTheme={isDarkTheme} onThemeToggle={handleChangeTheme}>*/}
+          {/*    {children}*/}
+          {/*  </Layout>*/}
+          {/*  /!*</PrivateRoute>*!/*/}
+          {/*</SessionProviders>*/}
+      </LocalizationProvider>
+    </ThemeProvider>
+    // </CacheProvider>
+  );
 }

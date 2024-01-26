@@ -7,7 +7,7 @@ export const Layout = ({ children, isDarkTheme, onThemeToggle }: any) => {
 		<Box display="flex" flexDirection="column" height="100vh">
 			<Header isDarkTheme={isDarkTheme} onThemeToggle={onThemeToggle}/>
 
-			<Box flexGrow={1} overflow="auto">
+			<Box flexGrow={1} overflow="auto" mt={12}>
 				{children}
 			</Box>
 

@@ -1,9 +1,10 @@
 import { IUser } from '@/app/modules/users';
 import { IAuthState, initialState } from './initialState';
 import { Types } from './types';
+import { ILoginPayload } from '@/app/components/AuthProvider/AuthProvider';
 
 export type Action =
-  | { type: Types.Login; payload: IUser }
+  | { type: Types.Login; payload: ILoginPayload }
   | { type: Types.Logout }
 
 export const reducer = (state: IAuthState, action: Action) => {

@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Typography, Container, Stack } from '@mui/material';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-import { Yup } from '@/validation';
 import * as authApi from '@/app/api/auth';
 import { TextField } from '@/app/components/TextField';
-import { preventDefault } from '@/app/helpers/preventDefault';
 import { useAuth } from '@/app/components/AuthProvider';
+import { Yup } from '@/app/validation';
 
 interface FormValues {
   email: string | null,
@@ -21,7 +20,7 @@ const defaultValues = {
   password: ''
 };
 
-const schema = Yup.object({
+const validationSchema = Yup.object({
   email: Yup.string().nullable().required(),
   password: Yup.string().nullable().required()
 });
@@ -31,32 +30,24 @@ export const LoginPage = () => {
   const router = useRouter();
   const form = useForm({
     defaultValues,
-    resolver: yupResolver(schema)
+    resolver: yupResolver(validationSchema)
   });
   const { login } = useAuth();
 
   const handleSubmit = (values: FormValues) => {
     authApi.login(values).then((data) => {
-      login(data);
+      console.log(login(data));
+      console.log(data)
       router.push('/markets');
     }).catch(() => {
       setIsError(true);
     });
   };
-  // const handleGoogleLogin = async () => {
-  //   try {
-  //     await signIn('google');
-  //     router.push('/markets');
-  //   } catch (error) {
-  //     console.error('Google login error:', error);
-  //     setIsError(true);
-  //   }
-  // };
 
   return (
     <Container maxWidth="xs">
       <FormProvider {...form}>
-        <Stack sx={{ mt: 10, alignItems: 'center' }}>
+        <Stack sx={{ alignItems: 'center' }}>
           <Typography variant="h5" color="primary" mb={4}>
             Welcome to crypto exchange!
           </Typography>
@@ -72,7 +63,7 @@ export const LoginPage = () => {
           spacing={2}
           mt={4}
           component="form"
-          onSubmit={preventDefault(form.handleSubmit(handleSubmit))}
+          onSubmit={(form.handleSubmit(handleSubmit))}
         >
           <TextField
             required

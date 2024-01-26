@@ -1,10 +1,10 @@
 "use client"
 
 import * as React from 'react';
-import { LoginPage } from "@/app/components/LoginPage/LoginPage";
+import { Wallet } from "@/app/components/Wallet";
 
 export default function Main() {
   return (
-    <LoginPage />
+    <Wallet />
   );
 };

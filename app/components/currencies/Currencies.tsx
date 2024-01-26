@@ -56,10 +56,9 @@ export const Currencies = () => {
   return (
     <Box 
     sx={{
-      width: '45%',
+      width: '60%',
       marginRight: 'auto',
       marginLeft: 'auto',
-      marginTop: 4,
       marginBottom: 4,
       '& .color.negative': {
         color: 'error.registration'

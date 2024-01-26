@@ -1,22 +1,12 @@
-"use client"
-
 import * as React from 'react';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import clsx from 'clsx';
-import { DataGrid, GridValueFormatterParams } from '@mui/x-data-grid';
-import { Box, Button, CircularProgress } from '@mui/material';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import StarIcon from '@mui/icons-material/Star';
-import { ICurrency, ICurrencyHistory } from './currencies/types';
+import { Button } from '@mui/material';
+import { GridValueFormatterParams } from '@mui/x-data-grid';
 import { changePercent } from '@/app/helpers/changePercent';
-import { CryptoChart } from './СryptoСhart';
-import { fetchCurrency, fetchCurrencyCandles } from '@/app/api/currencies';
-import { Buy } from './Buy';
-import { Chat } from '@/app/components/Chat';
+import { Buy } from '../markets/[coin]/Buy';
 
-const columns = [
+export const columns = [
   { field: 'symbol', headerName: 'Symbol', width: 80, cellClassName: 'symbol' },
   { field: 'name', headerName: 'Name', width: 100 },
   { field: 'priceUsd', headerName: 'Price USD', width: 140 },
@@ -47,82 +37,3 @@ const columns = [
   }
 ];
 
-export const CurrencyDataGrid = () => {
-  const { query } = useRouter();
-  const [ currency, setCurrency ] = useState<ICurrency | null>(null);
-  const [ history, setHistory ] = useState<ICurrencyHistory[] | null>(null);
-
-    useEffect(() => {
-      if (!query.id) return;
-
-      fetchCurrency(query.id.toString())
-        .then(({ data }: { data: ICurrency }) => {
-          setCurrency(data);
-        });
-    fetchCurrencyCandles(query.id.toString())
-      .then(( data : ICurrencyHistory [] ) => {
-        setHistory(data.map(([ date, open, high, low, close ] : any) => ({
-          date: new Date(date),
-          open,
-          high,
-          low,
-          close,
-          volume: 0
-        })));
-      });
-  }, [ query ]);
-
-  return !currency ? (
-    <CircularProgress
-      size={36}
-      style={{ marginLeft: '50%', marginTop: 12 }}
-    />
-  ) : (
-    <Box 
-      sx={{
-        width: '50%',
-        marginRight: 'auto',
-        marginLeft: 'auto',
-        marginTop: 8,
-        marginBottom: 4,
-        '& .color.negative': {
-          color: 'error.registration'
-        },
-        '& .color.positive': {
-          color: 'success.registration'
-        },
-        '& .symbol': {
-          fontWeight: 'bold'
-        }
-      }}
-    >
-      <DataGrid
-        hideFooterPagination
-        hideFooter
-        rows={[ currency ]}
-        columns={columns}
-        disableRowSelectionOnClick
-        slotProps={{
-          baseCheckbox: {
-            icon: <StarBorderIcon />,
-            checkedIcon: <StarIcon />
-          }
-        }
-      }
-      />
-      
-      {!history ? (
-        <CircularProgress
-          size={36}
-          style={{ marginLeft: '50%', marginTop: 12 }}
-        />
-      ) : (
-        <CryptoChart data={history} />
-      )}
-      <Buy priceUsd={+currency.priceUsd} symbol={currency.symbol} />
-      <Chat />
-      {/*<NewChat />*/}
-      {/*<ChatJS />*/}
-    </Box>
-  );
-};

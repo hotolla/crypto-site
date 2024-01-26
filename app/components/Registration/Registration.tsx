@@ -1,15 +1,17 @@
+'use client'
+
 import { useForm, FormProvider } from 'react-hook-form';
-import {Button, Typography, Stack, Container, Box, Grid} from '@mui/material';
+import { Button, Typography, Stack, Container, Box, Grid } from '@mui/material';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import * as authApi from '@/app/api/auth';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Yup } from '@/validation';
 import { TextField } from '@/app/components/TextField';
 import { preventDefault } from '@/app/helpers/preventDefault';
-import {useRouter} from "next/router";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from 'next/image'
 import logo from './crypto_main.png';
+import { object, string, number, date, InferType } from 'yup';
 
 interface FormValues {
   name: string | null,
@@ -25,11 +27,11 @@ const defaultValues = {
   confirmPassword: ''
 };
 
-const schema = Yup.object({
-  name: Yup.string().nullable().required(),
-  email: Yup.string().nullable().email().required(),
-  password: Yup.string().nullable().required(),
-  confirmPassword: Yup.string().nullable().required()
+const schema = object({
+  name: string().nullable().required(),
+  email: string().nullable().email().required(),
+  password: string().nullable().required(),
+  confirmPassword: string().nullable().required()
 });
 
 export const Registration = () => {
@@ -47,7 +49,7 @@ export const Registration = () => {
   };
 
   return (
-    <Box mt={10}>
+    <Box>
       <Typography variant="h3" color="primary" align="center" mb={1}>
         Welcome to crypto exchange!
       </Typography>
