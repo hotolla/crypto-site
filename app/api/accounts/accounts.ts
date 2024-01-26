@@ -2,6 +2,7 @@
 
 import { AxiosRequestConfig } from 'axios';
 import api from "@/app/api/api";
+import { getSession } from 'next-auth/react';
 
 export const chargeAccount = (account: any, token: any, config?: AxiosRequestConfig) => {
   const authConfig = {
