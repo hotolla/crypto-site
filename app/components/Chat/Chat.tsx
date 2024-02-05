@@ -15,8 +15,8 @@ import {
 import LiveHelpIcon from '@mui/icons-material/LiveHelp';
 import SendIcon from '@mui/icons-material/Send';
 import { KeyboardEventHandler, useEffect, useRef, useState } from 'react';
-import Toolbar from '@mui/material/Toolbar';
 import { InputProps as StandardInputProps } from '@mui/material/Input/Input';
+import Toolbar from '@mui/material/Toolbar';
 import { socket } from "@/app/socket";
 
 export interface IChatMessage {

@@ -3,6 +3,7 @@ import React from "react";
 import Head from "next/head";
 import { MainLayout } from "@/app/components/MainLayout";
 import { AuthProvider } from '@/app/components/AuthProvider';
+import { SessionProviders } from '@/app/components/SessionProviders';
 
 export default function RootLayout({
    children
@@ -17,9 +18,11 @@ export default function RootLayout({
       <meta name="description" content="The Crypto exchange built with App Router." />
     </Head>
       <body>
-      <AuthProvider>
-        <MainLayout>{children}</MainLayout>
-      </AuthProvider>
+        <SessionProviders>
+          <AuthProvider>
+            <MainLayout>{children}</MainLayout>
+          </AuthProvider>
+        </SessionProviders>
       </body>
     </html>
   )

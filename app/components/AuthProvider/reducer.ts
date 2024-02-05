@@ -1,4 +1,3 @@
-import { IUser } from '@/app/modules/users';
 import { IAuthState, initialState } from './initialState';
 import { Types } from './types';
 import { ILoginPayload } from '@/app/components/AuthProvider/AuthProvider';

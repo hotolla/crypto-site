@@ -1,8 +1,8 @@
 'use client'
 
 import React, {PropsWithChildren, useContext} from 'react';
-import { AuthContext } from "@/app/components/AuthProvider";
 import { useRouter } from 'next/navigation';
+import { AuthContext } from '@/app/components/AuthProvider';
 
 export const PrivateRoute = ({ children } : PropsWithChildren) => {
   const { isAuthenticated} = useContext(AuthContext);

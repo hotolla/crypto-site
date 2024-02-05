@@ -1,21 +1,32 @@
 'use client';
 
 import { AxiosRequestConfig } from 'axios';
-import api from "@/app/api/api";
+import api from '@/app/api/api';
 
-export const chargeAccount = (account: any, token: any, config?: AxiosRequestConfig) => {
-  const authConfig = {
-    ...config,
-    headers: {
-      ...config?.headers,
-      'Authorization': `Bearer ${token}`
-    }
-  };
+export const chargeAccount = (account: any, config?: AxiosRequestConfig) => {
+  return api.post('/accounts', account)
+    .then(({ data }) => {
+      console.log(account)
 
-  console.log(authConfig.headers.Authorization)
-  return api.post('/accounts', account, authConfig)
-    .then(({ data }) => data)
+      return data
+    })
     .catch((error) => {
       throw error;
     });
 };
+
+// export const chargeAccount = (account: any, token: any, config?: AxiosRequestConfig) => {
+//   const authConfig = {
+//     ...config,
+//     headers: {
+//       ...config?.headers,
+//       'Authorization': `Bearer ${token}`
+//     }
+//   };
+
+//   return api.post('/accounts', account, authConfig)
+//     .then(({ data }) => data)
+//     .catch((error) => {
+//       throw error;
+//     });
+// };

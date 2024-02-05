@@ -7,15 +7,14 @@ export const fetchCurrencies = (config?: AxiosRequestConfig) => {
   });
 };
 
-export const fetchCurrency = (id: ICurrency['id'], cofig?: AxiosRequestConfig) => {
-  console.log(id)
-  return axios.get(`https://api.coincap.io/v2/assets/${id}`, cofig).then(({ data }) => {
+export const fetchCurrency = (id: ICurrency['id'], config?: AxiosRequestConfig) => {
+  return axios.get(`https://api.coincap.io/v2/assets/${id}`, config).then(({ data }) => {
     return data;
   });
 };
 
 export const fetchCurrencyCandles = (id: ICurrency['id'], config?: AxiosRequestConfig) => {
-  return axios.get('https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=7',config)
+  return axios.get('https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=7', config)
     .then(({ data }) => {
       return data;
   });

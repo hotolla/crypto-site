@@ -1,9 +1,8 @@
 "use client"
-// import { PrivateRoute } from '../../../../../crypto-exchange/src/modules/auth';
 import * as React from 'react';
-import { PrivateRoute } from "@/app/modules/auth";
-import { CurrenciesProvider } from "@/app/components/currencies/CurrenciesProvider";
-import { Currencies } from "@/app/components/currencies/Currencies";
+import { PrivateRoute } from '@/app/modules/auth';
+import { Currencies } from '@/app/components/currencies/Currencies';
+import { CurrenciesProvider } from '@/app/components/currencies/CurrenciesProvider';
 
 export default function Markets() {
   return (

@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
-import { Yup } from '@/app/validation';
+import {  useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, FormProvider } from 'react-hook-form';
-import { Stack, Paper, Box, Button } from "@mui/material";
+import { Stack, Paper, Box, Button } from '@mui/material';
+import { Yup } from '@/app/validation';
 import { TextField } from '@/app/components/TextField';
 import { chargeAccount } from '@/app/api/accounts/accounts';
-import { useAuth } from '@/app/components/AuthProvider';
 
 interface FormValues {
   amount: number | null,
@@ -27,7 +26,6 @@ const validationSchema = Yup.object({
 });
 
 export const Wallet = () => {
-  const { token } = useAuth();
   const [ balance, setBalance,  ] = useState<IBalance | null>(null);
 
   const form = useForm({
@@ -36,13 +34,15 @@ export const Wallet = () => {
   });
 
   const handleSubmit = (values: FormValues) => {
-    console.log(values, token)
-
-    chargeAccount(values, token).then((data) => {
-      // console.log(data)
-      setBalance(data);
-    }).catch(() => {
-    });
+    console.log(values)
+    chargeAccount(values)
+      .then((data) => {
+        setBalance(data);
+        console.log(data)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (

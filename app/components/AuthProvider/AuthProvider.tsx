@@ -1,8 +1,8 @@
 'use client'
 
 import { PropsWithChildren, createContext, useEffect, useReducer } from 'react';
-import { IUser } from '@/app/modules/users';
 import { initialState, IAuthState } from './initialState';
+import { IUser } from '@/app/modules/users';
 import { reducer } from './reducer';
 import { Types } from './types';
 
@@ -48,6 +48,7 @@ export const AuthProvider = ({ children } : PropsWithChildren) => {
 
   useEffect(() => {
     localStorage.setItem(localStorageKey, JSON.stringify(state));
+    localStorage.setItem('token', JSON.stringify(state.token));
   }, [ state ]);
 
   return (
