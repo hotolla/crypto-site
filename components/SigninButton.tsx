@@ -1,8 +1,9 @@
 "use client";
+
 import React from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import LoginIcon from '@mui/icons-material/Login';
 import { Button } from '@mui/material';
+import LoginIcon from '@mui/icons-material/Login';
 
 export const SigninButton = () => {
   const { data: session } = useSession();

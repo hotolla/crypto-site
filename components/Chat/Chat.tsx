@@ -17,7 +17,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { KeyboardEventHandler, useEffect, useRef, useState } from 'react';
 import { InputProps as StandardInputProps } from '@mui/material/Input/Input';
 import Toolbar from '@mui/material/Toolbar';
-import { socket } from "@/app/socket";
+import { socket } from "@/socket";
 
 export interface IChatMessage {
   user: string;

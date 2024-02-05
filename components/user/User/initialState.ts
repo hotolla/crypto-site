@@ -1,4 +1,4 @@
-import { IUser } from '@/app/modules/users';
+import { IUser } from '@/modules/users';
 
 export interface IUserProfile extends IUser {
   balance: number,

@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { Stack, Typography, Container } from "@mui/material";
-import { BasicPopover } from "./Popover";
+import Image from 'next/image';
+import { Stack, Typography, Container } from '@mui/material';
+import { BasicPopover } from './Popover';
 
 const popoverText2 = {
   text: "center",

@@ -4,15 +4,15 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box, Button, CircularProgress } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import { ICurrency, ICurrencyHistory } from './currencies/types';
-import { CryptoChart } from '../markets/[coin]/СryptoСhart';
-import { fetchCurrency, fetchCurrencyCandles } from '@/app/api/currencies';
-import { Buy } from '../markets/[coin]/Buy';
-import { Chat } from '@/app/components/Chat';
-import { columns } from "@/app/components/columns";
+import { Chat } from '@/components/Chat';
+import { columns } from "@/components/columns";
+import { fetchCurrency, fetchCurrencyCandles } from '@/api/currencies';
+import { Buy } from '@/app/markets/[coin]/Buy';
+import { CryptoChart } from '@/app/markets/[coin]/СryptoСhart';
 
 export const CurrencyDataGrid  = (props: { coin: string }) => {
   const [ currency, setCurrency ] = useState<ICurrency | null>(null);

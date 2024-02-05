@@ -1,7 +1,6 @@
-import { Button, Grid, InputAdornment, MenuItem, TextField, Typography } from '@mui/material';
-// import { ChangeEvent, useState } from 'react';
-import { fetchExchangeRates } from '@/app/api/exchangeRates';
 import { ChangeEvent, useState } from 'react';
+import { Button, Grid, InputAdornment, MenuItem, TextField, Typography } from '@mui/material';
+import { fetchExchangeRates } from '@/api/exchangeRates';
 
 interface IProps {
   priceUsd: number,

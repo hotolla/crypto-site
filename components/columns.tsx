@@ -3,8 +3,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { Button } from '@mui/material';
 import { GridValueFormatterParams } from '@mui/x-data-grid';
-import { changePercent } from '@/app/helpers/changePercent';
-import { Buy } from '../markets/[coin]/Buy';
+import { changePercent } from '@/helpers/changePercent';
 
 export const columns = [
   { field: 'symbol', headerName: 'Symbol', width: 80, cellClassName: 'symbol' },

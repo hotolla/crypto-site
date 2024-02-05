@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { Box, Button, Grid, InputAdornment, MenuItem, Select, TextField, Typography, styled } from '@mui/material';
+import { Button, Grid, InputAdornment, MenuItem, Select, TextField, Typography } from '@mui/material';
 
 interface IProps {
   priceUsd: number,

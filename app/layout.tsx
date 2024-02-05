@@ -1,9 +1,9 @@
 "use client"
-import React from "react";
-import Head from "next/head";
-import { MainLayout } from "@/app/components/MainLayout";
-import { AuthProvider } from '@/app/components/AuthProvider';
-import { SessionProviders } from '@/app/components/SessionProviders';
+import React from 'react';
+import Head from 'next/head';
+import { MainLayout } from '@/components/MainLayout';
+import { AuthProvider } from '@/components/AuthProvider';
+import { SessionProviders } from '@/components/SessionProviders';
 
 export default function RootLayout({
    children

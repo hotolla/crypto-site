@@ -2,9 +2,9 @@
 
 import { PropsWithChildren, createContext, useEffect, useReducer } from 'react';
 import { initialState, IAuthState } from './initialState';
-import { IUser } from '@/app/modules/users';
 import { reducer } from './reducer';
 import { Types } from './types';
+import { IUser } from '@/modules/users';
 
 export interface ILoginPayload {
   user: IUser,

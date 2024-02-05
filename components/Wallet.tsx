@@ -1,10 +1,10 @@
 import {  useState } from 'react';
+import { Yup } from '@/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Stack, Paper, Box, Button } from '@mui/material';
-import { Yup } from '@/app/validation';
-import { TextField } from '@/app/components/TextField';
-import { chargeAccount } from '@/app/api/accounts/accounts';
+import { chargeAccount } from '@/api/accounts/accounts';
+import { TextField } from '@/components/TextField';
 
 interface FormValues {
   amount: number | null,

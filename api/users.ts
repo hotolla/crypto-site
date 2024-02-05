@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { api } from '@/app/api/api';
+import api from '@/api/api';
 
 export interface IUserProfileData {
   name?: string | null,

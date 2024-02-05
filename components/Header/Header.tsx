@@ -1,4 +1,4 @@
-import { SigninButton } from '@/app/components/SigninButton';
+import { SigninButton } from '@/components/SigninButton';
 import { useState, useEffect } from 'react';
 import * as React from 'react';
 import Link from 'next/link';
@@ -19,7 +19,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
 import LoginIcon from '@mui/icons-material/Login';
 import { LangSwitcher } from './LangSwitcher';
-import { useAuth } from '@/app/components/AuthProvider';
+import { useAuth } from '@/components/AuthProvider';
 
 const pages = [ 'Currencies', 'Trade', 'Orders' ];
 const settings = [ 'Profile', 'Account', 'Dashboard', 'Logout' ];

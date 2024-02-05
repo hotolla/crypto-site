@@ -2,18 +2,16 @@
 
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box, Button, CircularProgress } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import { CryptoChart } from './СryptoСhart';
-import { fetchCurrency, fetchCurrencyCandles } from '@/app/api/currencies';
+import { fetchCurrency, fetchCurrencyCandles } from '@/api/currencies';
 import { Buy } from './Buy';
-import { Chat } from '@/app/components/Chat';
-import { columns } from "@/app/components/columns";
-import {ICurrency} from "@/app/store/currenciesSlice";
-import {ICurrencyHistory} from "@/app/components/currencies/types";
+import { Chat } from '@/components/Chat';
+import { columns } from "@/components/columns";
+import { ICurrency, ICurrencyHistory } from "@/components/currencies/types";
 
 export default function Page({ params: { coin } }: { params: { coin: string } }) {
     const [ currency, setCurrency ] = useState<ICurrency | null>(null);

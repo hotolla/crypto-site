@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { ICurrency } from '@/app/components/currencies/types';
+import { ICurrency } from '@/components/currencies/types';
 
 export const fetchCurrencies = (config?: AxiosRequestConfig) => {
   return axios.get('https://api.coincap.io/v2/assets', config).then(({ data }) => {

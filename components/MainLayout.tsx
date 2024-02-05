@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import { Layout } from "@/app/components/Layout";
-import { darkTheme, lightTheme } from "@/app/themes/themes";
+import { Layout } from '@/components/Layout';
+import { darkTheme, lightTheme } from '@/themes/themes';
 
 const isDarkThemeKey = 'isDarkTheme';
 let item = false;
