@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { IUser } from '@/components/Registration/types';
-import api from "@/api/api";
+import { api } from "@/api";
 
 export interface ILoginData {
   name?: string | null,

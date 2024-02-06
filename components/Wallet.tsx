@@ -2,7 +2,8 @@ import {  useState } from 'react';
 import { Yup } from '@/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, FormProvider } from 'react-hook-form';
-import { Stack, Paper, Box, Button } from '@mui/material';
+import { Stack, Paper, Box, Button, IconButton } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { chargeAccount } from '@/api/accounts/accounts';
 import { TextField } from '@/components/TextField';
 
@@ -27,11 +28,17 @@ const validationSchema = Yup.object({
 
 export const Wallet = () => {
   const [ balance, setBalance,  ] = useState<IBalance | null>(null);
+  const [showBalance, setShowBalance] = useState<boolean>(false);
 
   const form = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema)
   });
+
+  const toggleBalanceVisibility = () => {
+    setShowBalance(!showBalance);
+  };
+
 
   const handleSubmit = (values: FormValues) => {
     console.log(values)
@@ -50,12 +57,11 @@ export const Wallet = () => {
 
       <Stack spacing={2}>
         <Stack spacing={1} direction="column">
-          <Box>Estimated Balance: {balance?.amount} {balance?.currency}</Box>
+          <Box sx={{ backgroundColor: showBalance ? 'red' : 'green' }}>Estimated Balance: {balance?.amount} {balance?.currency}</Box>
 
-          {/*<IconButton>*/}
-          {/*  <VisibilityIcon />*/}
-          {/*</IconButton>*/}
-
+          <IconButton onClick={toggleBalanceVisibility}>
+            <VisibilityIcon />
+          </IconButton>
         </Stack>
 
         <FormProvider {...form}>
@@ -65,7 +71,7 @@ export const Wallet = () => {
               name="amount"
               label="amount"
               placeholder="Enter amount ..."
-              sx={{mb: 1}}
+              sx={{mb: 1 }}
             />
 
             <TextField

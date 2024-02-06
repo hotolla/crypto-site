@@ -24,21 +24,20 @@ export const AuthContext = createContext<IAuthProviderValues>({
   logout: () => {}
 });
 
-const localStorageKey = 'auth';
+export const localStorageKey = 'auth';
 
 export const AuthProvider = ({ children } : PropsWithChildren) => {
   const [ state, dispatch ] = useReducer(reducer, initialState, () => {
-
     if (typeof window !== 'undefined') {
       const localStorageData = JSON.parse(localStorage?.getItem(localStorageKey) || '{}');
 
       return localStorageData || initialState;
     }
+
     return initialState;
   });
 
   const login = (payload: ILoginPayload) => {
-    console.log(payload)
     dispatch({ type: Types.Login, payload: payload,  });
   };
 
@@ -48,7 +47,6 @@ export const AuthProvider = ({ children } : PropsWithChildren) => {
 
   useEffect(() => {
     localStorage.setItem(localStorageKey, JSON.stringify(state));
-    localStorage.setItem('token', JSON.stringify(state.token));
   }, [ state ]);
 
   return (

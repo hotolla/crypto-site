@@ -5,10 +5,10 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Typography, Container, Stack } from '@mui/material';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-import * as authApi from '@/app/api/auth';
-import { TextField } from '@/app/components/TextField';
-import { useAuth } from '@/app/components/AuthProvider';
-import { Yup } from '@/app/validation';
+import * as authApi from '@/api/auth';
+import { TextField } from '@/components/TextField';
+import { useAuth } from '@/components/AuthProvider';
+import { Yup } from '@/validation';
 
 interface FormValues {
   email: string | null,
@@ -36,8 +36,6 @@ export const LoginPage = () => {
 
   const handleSubmit = (values: FormValues) => {
     authApi.login(values).then((data) => {
-      console.log(login(data));
-      console.log(data)
       router.push('/markets');
     }).catch(() => {
       setIsError(true);

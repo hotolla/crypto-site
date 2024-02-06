@@ -1,7 +1,7 @@
 'use client';
 
 import { AxiosRequestConfig } from 'axios';
-import api from '@/api/api';
+import { api } from '@/api';
 
 export const chargeAccount = (account: any, config?: AxiosRequestConfig) => {
   return api.post('/accounts', account)
