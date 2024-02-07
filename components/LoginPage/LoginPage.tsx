@@ -2,13 +2,13 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm, FormProvider } from 'react-hook-form';
+import { Yup } from '@/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Typography, Container, Stack } from '@mui/material';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import * as authApi from '@/api/auth';
 import { TextField } from '@/components/TextField';
 import { useAuth } from '@/components/AuthProvider';
-import { Yup } from '@/validation';
 
 interface FormValues {
   email: string | null,
@@ -36,6 +36,7 @@ export const LoginPage = () => {
 
   const handleSubmit = (values: FormValues) => {
     authApi.login(values).then((data) => {
+      login(data);
       router.push('/markets');
     }).catch(() => {
       setIsError(true);

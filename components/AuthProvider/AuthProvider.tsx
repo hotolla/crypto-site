@@ -14,6 +14,7 @@ export interface ILoginPayload {
 interface IAuthProviderValues extends IAuthState {
   isAuthenticated: boolean;
   login: (payload: ILoginPayload) => void;
+  register: (payload: ILoginPayload) => void;
   logout: () => void;
 }
 
@@ -21,6 +22,7 @@ export const AuthContext = createContext<IAuthProviderValues>({
   ...initialState,
 
   login: () => {},
+  register: () => {},
   logout: () => {}
 });
 
@@ -41,6 +43,11 @@ export const AuthProvider = ({ children } : PropsWithChildren) => {
     dispatch({ type: Types.Login, payload: payload,  });
   };
 
+  const register = (payload: ILoginPayload) => {
+    console.log(payload)
+    dispatch({ type: Types.Login, payload: payload,  });
+  };
+
   const logout = () => {
     dispatch({ type: Types.Logout });
   };
@@ -54,6 +61,7 @@ export const AuthProvider = ({ children } : PropsWithChildren) => {
       value={{
         ...state,
 
+        register,
         login,
         logout
       }}

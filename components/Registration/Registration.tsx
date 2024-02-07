@@ -1,17 +1,18 @@
 'use client'
 
 import { useForm, FormProvider } from 'react-hook-form';
-import { Button, Typography, Stack, Container, Box, Grid } from '@mui/material';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
-import * as authApi from '@/app/api/auth';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { TextField } from '@/app/components/TextField';
-import { preventDefault } from '@/app/helpers/preventDefault';
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import Link from 'next/link';
 import Image from 'next/image'
-import logo from './crypto_main.png';
-import { object, string, number, date, InferType } from 'yup';
+import { useRouter } from 'next/navigation';
+import { object, string } from 'yup';
+import { Button, Typography, Stack, Box, Grid } from '@mui/material';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import * as authApi from '@/api/auth';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { TextField } from '@/components/TextField';
+import { preventDefault } from '@/helpers/preventDefault';
+import { register } from '@/api/auth';
+import { useAuth } from '@/components/AuthProvider';
 
 interface FormValues {
   name: string | null,
@@ -40,10 +41,13 @@ export const Registration = () => {
     defaultValues,
     resolver: yupResolver(schema)
   });
+  const { register } = useAuth();
+
 
   const handleSubmit = (values: FormValues) => {
     authApi.register(values)
-    .then(() => {
+    .then((data) => {
+      register(data);
         router.push("/markets");
       });
   };
