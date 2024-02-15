@@ -1,17 +1,25 @@
 import { ChangeEvent, useState } from 'react';
-import { Button, Grid, InputAdornment, MenuItem, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Grid,
+  InputAdornment,
+  MenuItem,
+  TextField,
+  Typography
+} from '@mui/material';
 import { fetchExchangeRates } from '@/api/exchangeRates';
 
 interface IProps {
   priceUsd: number,
   symbol: string
-};
+}
 
 enum CurrencyCode {
   USD = 'USD',
   EUR = 'EUR',
   PLN = 'PLN',
-};
+}
 
 const currencies = [
   {
@@ -55,6 +63,7 @@ export const Buy = ({ priceUsd, symbol }: IProps) => {
       setEstimatedPrice(priceUsd * data[value]);
     });
   };
+
   return (
 		<>
 			<Grid

@@ -2,7 +2,7 @@ import {  useState } from 'react';
 import { Yup } from '@/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, FormProvider } from 'react-hook-form';
-import { Stack, Paper, Box, Button, IconButton } from '@mui/material';
+import { Stack, Paper, Box, Button, IconButton, Container, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { chargeAccount } from '@/api/accounts/accounts';
 import { TextField } from '@/components/TextField';
@@ -53,17 +53,24 @@ export const Wallet = () => {
   };
 
   return (
-    <Paper elevation={1}>
+    <Paper elevation={1} sx={{maxWidth: 500}}>
+      <Container>
 
-      <Stack spacing={2}>
-        <Stack spacing={1} direction="column">
-          <Box sx={{ backgroundColor: showBalance ? 'red' : 'green' }}>Estimated Balance: {balance?.amount} {balance?.currency}</Box>
+        <Stack spacing={1}>
+          <Stack spacing={3} direction="row" alignItems="center">
+            <Typography variant="h6">Estimated Balance:</Typography>
 
-          <IconButton onClick={toggleBalanceVisibility}>
-            <VisibilityIcon />
-          </IconButton>
+            <IconButton onClick={toggleBalanceVisibility}>
+              <VisibilityIcon />
+            </IconButton>
+          </Stack>
+          <Stack>
+            {showBalance ?
+              <Box>{balance?.amount} {balance?.currency}5000</Box>
+              : <Box>********</Box>
+            }
+          </Stack>
         </Stack>
-
         <FormProvider {...form}>
           <form onSubmit={(form.handleSubmit(handleSubmit))}>
             <TextField
@@ -83,7 +90,7 @@ export const Wallet = () => {
             <Button variant="contained" type="submit">Deposit</Button>
           </form>
         </FormProvider>
-      </Stack>
+      </Container>
     </Paper>
   );
 };
