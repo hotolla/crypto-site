@@ -18,11 +18,10 @@ import {
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
 import LoginIcon from '@mui/icons-material/Login';
-import { LangSwitcher } from './LangSwitcher';
 import { useAuth } from '@/components/AuthProvider';
 
-const pages = [ 'Currencies', 'Trade', 'Orders' ];
-const settings = [ 'Profile', 'Account', 'Dashboard', 'Logout' ];
+const pages = [ 'markets', 'dashboard' ];
+const settings = [ 'dashboard', 'login' ];
 
 interface IProps {
   isDarkTheme: boolean,
@@ -30,7 +29,6 @@ interface IProps {
 }
 
 export const Header = ({ isDarkTheme, onThemeToggle }: IProps) => {
-  const [ anchorElNav, setAnchorElNav ] = React.useState<null | HTMLElement>(null);
   const [ anchorElUser, setAnchorElUser ] = React.useState<null | HTMLElement>(null);
   const { isAuthenticated, user, logout } = useAuth();
   const [isClient, setIsClient] = useState(false)
@@ -39,17 +37,8 @@ export const Header = ({ isDarkTheme, onThemeToggle }: IProps) => {
     setIsClient(true)
   }, [])
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -70,13 +59,11 @@ export const Header = ({ isDarkTheme, onThemeToggle }: IProps) => {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
+              <Link  key={page} href={`/${page}`} passHref legacyBehavior>
+                <Typography variant="button" align="center" mr={5} style={{ cursor: 'pointer' }}>
+                  {page}
+                </Typography>
+              </Link>
             ))}
           </Box>
 
@@ -104,24 +91,28 @@ export const Header = ({ isDarkTheme, onThemeToggle }: IProps) => {
           >
             {settings.map((setting) => (
               <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">{setting}</Typography>
+
+                <Link  key={setting} href={`/${setting}`} passHref legacyBehavior>
+                  <Typography variant="h6" align="center" mr={5} style={{ cursor: 'pointer' }}>
+                    {setting}
+                  </Typography>
+                </Link>
               </MenuItem>
             ))}
           </Menu>
 
           <Switch checked={isDarkTheme} onChange={onThemeToggle} />
-          <LangSwitcher />
-
-          {/*<SigninButton />*/}
 
           {isClient && isAuthenticated ? (
-            <Button
-              color="inherit"
-              startIcon={<LoginIcon />}
-              onClick={logout}
-            >
-              Logout
-            </Button>
+            <Link href="/login" passHref legacyBehavior>
+              <Button
+                color="inherit"
+                startIcon={<LoginIcon />}
+                onClick={logout}
+              >
+                Logout
+              </Button>
+            </Link>
           ) : (
             <Link href="/login" passHref legacyBehavior>
               <Button
