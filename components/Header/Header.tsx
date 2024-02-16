@@ -20,7 +20,7 @@ import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
 import LoginIcon from '@mui/icons-material/Login';
 import { useAuth } from '@/components/AuthProvider';
 
-const pages = [ 'markets', 'dashboard' ];
+const pages = [ 'markets', 'dashboard', 'help' ];
 const settings = [ 'dashboard', 'login' ];
 
 interface IProps {

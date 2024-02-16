@@ -23,12 +23,11 @@ import {
 	MovingAverageTooltip
 } from 'react-stockcharts/lib/tooltip';
 import { ema, heikinAshi, sma } from 'react-stockcharts/lib/indicator';
-// import { fitWidth } from "react-stockcharts/lib/helper";
 import { last } from 'react-stockcharts/lib/utils';
 import useDimensions from 'react-use-dimensions';
 
 export const CryptoChart = ({ type = 'svg', data: initialData }) => {
-  const [ rootRef, { width, height } ] = useDimensions();
+  const [ rootRef ] = useDimensions();
 
 		const ha = heikinAshi();
 		const ema20 = ema()
@@ -165,16 +164,3 @@ export const CryptoChart = ({ type = 'svg', data: initialData }) => {
 		);
 };
 
-
-// CryptoChart.propTypes = {
-// 	data: PropTypes.array.isRequired,
-// 	width: PropTypes.number.isRequired,
-// 	ratio: PropTypes.number.isRequired,
-// 	type: PropTypes.oneOf(["svg", "hybrid"]).isRequired,
-// };
-
-// CryptoChart.defaultProps = {
-// 	type: "svg",
-// };
-
-// CryptoChart = fitWidth(CryptoChart);

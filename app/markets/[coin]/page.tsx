@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -7,8 +7,8 @@ import { Box, CircularProgress } from '@mui/material';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import { CryptoChart } from './СryptoСhart';
-import { fetchCurrency, fetchCurrencyCandles } from '@/api/currencies';
 import { Buy } from './Buy';
+import { fetchCurrency, fetchCurrencyCandles } from '@/api/currencies';
 import { Chat } from '@/components/Chat';
 import { columns } from "@/components/columns";
 import { ICurrency, ICurrencyHistory } from "@/components/currencies/types";
@@ -46,7 +46,7 @@ export default function Page({ params: { coin } }: { params: { coin: string } })
     ) : (
       <Box
         sx={{
-            width: '50%',
+            width: '60%',
             marginRight: 'auto',
             marginLeft: 'auto',
             // marginTop: 8,

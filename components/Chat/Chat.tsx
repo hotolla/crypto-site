@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Box,
   FormControl,
@@ -42,10 +44,7 @@ export const Chat = () => {
 
     function handleMessage(value: IChatMessage) {
       setChatMessages(previous => [...previous, value]);
-      console.log(chatMessages);
     }
-    console.log(user, message);
-
 
     socket.on('connect', onConnect);
     socket.on('disconnect', onDisconnect);
@@ -72,16 +71,16 @@ export const Chat = () => {
     }
   };
   const sendMessage = (event:   any) => {
-    // if(user && message) {
-    //   webSocket.current.send(JSON.stringify({
-    //     user,
-    //     message
-    //   }));
-    // }
+    event.preventDefault();
+
+    if(user && message) {
+      console.log(user, message)
+      socket.emit('clientMessage',{ user, message });
+    }
   };
 
   return (
-    <Box width={1200} height={400} mt={2}>
+    <Box width={1200} height={400} m={2}>
 
       <AppBar position="static">
         <Toolbar>
