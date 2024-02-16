@@ -13,12 +13,12 @@ import {
   Typography,
   AppBar
 } from '@mui/material';
+import { socket } from "@/socket";
+import { KeyboardEventHandler, useEffect, useRef, useState } from 'react';
 import LiveHelpIcon from '@mui/icons-material/LiveHelp';
 import SendIcon from '@mui/icons-material/Send';
-import { KeyboardEventHandler, useEffect, useRef, useState } from 'react';
-import { InputProps as StandardInputProps } from '@mui/material/Input/Input';
 import Toolbar from '@mui/material/Toolbar';
-import { socket } from "@/socket";
+import { InputProps as StandardInputProps } from '@mui/material/Input/Input';
 
 export interface IChatMessage {
   user: string;
@@ -43,7 +43,12 @@ export const Chat = () => {
     }
 
     function handleMessage(value: IChatMessage) {
-      setChatMessages(previous => [...previous, value]);
+      setChatMessages(previous => {
+        const updatedMessages = [... previous, value];
+        const messagesToShow = updatedMessages.length > 4 ? updatedMessages.slice(-4) : updatedMessages;
+
+        return messagesToShow
+      });
     }
 
     socket.on('connect', onConnect);
@@ -80,64 +85,66 @@ export const Chat = () => {
   };
 
   return (
-    <Box width={1200} height={400} m={2}>
+    <Box display="flex" justifyContent="center" alignItems="center">
+      <Box width={1200} height={400} m={2}>
 
-      <AppBar position="static">
-        <Toolbar>
-          <LiveHelpIcon fontSize={'large'}/>
-          <Typography variant="h6" align="center">
-            Chat with personal assistant
-          </Typography>
-        </Toolbar>
-      </AppBar>
+        <AppBar position="static">
+          <Toolbar>
+            <LiveHelpIcon fontSize={'large'}/>
+            <Typography variant="h6" align="center">
+              Chat with personal assistant
+            </Typography>
+          </Toolbar>
+        </AppBar>
 
-      <Paper elevation={4}>
-        <Box p={2}>
-          <Typography variant="h4" gutterBottom>
-            I am your personal assistant. How can I help you?
-          </Typography>
-          <Grid container spacing={2} alignItems="center">
+        <Paper elevation={4}>
+          <Box p={2}>
+            <Typography variant="h4" gutterBottom>
+              I am your personal assistant. How can I help you?
+            </Typography>
+            <Grid container spacing={2} alignItems="center">
 
-            <Grid xs={2} item>
-              <FormControl fullWidth>
-                <TextField onChange={handleUserChange}
-                 value={user}
-                 label="Nickname"
-                 variant="outlined"/>
-              </FormControl>
+              <Grid xs={2} item>
+                <FormControl fullWidth>
+                  <TextField onChange={handleUserChange}
+                   value={user}
+                   label="Nickname"
+                   variant="outlined"/>
+                </FormControl>
+              </Grid>
+              <Grid xs={8} item>
+                <FormControl fullWidth>
+                  <TextField
+                    value={message}
+                    label="Type your message..."
+                    variant="outlined"
+                    onChange={handleMessageChange}
+                    onKeyDown={handleEnterKey}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item>
+                <IconButton
+                  aria-label="send"
+                  color="primary"
+                  onClick={sendMessage}
+                >
+                  <SendIcon/>
+                </IconButton>
+              </Grid>
             </Grid>
-            <Grid xs={8} item>
-              <FormControl fullWidth>
-                <TextField
-                  value={message}
-                  label="Type your message..."
-                  variant="outlined"
-                  onChange={handleMessageChange}
-                  onKeyDown={handleEnterKey}
-                />
-              </FormControl>
-            </Grid>
-            <Grid item>
-              <IconButton
-                aria-label="send"
-                color="primary"
-                onClick={sendMessage}
-              >
-                <SendIcon/>
-              </IconButton>
-            </Grid>
-          </Grid>
 
-          <List ref={scrollBottomRef}>
-            {chatMessages.map((chatMessage, index) => (
-              <ListItem key={index}>
-                <ListItemText primary={`${chatMessage.user}: ${chatMessage.message}`}/>
-              </ListItem>
-            ))}
-          </List>
+            <List ref={scrollBottomRef}>
+              {chatMessages.map((chatMessage, index) => (
+                <ListItem key={index}>
+                  <ListItemText primary={`${chatMessage.user}: ${chatMessage.message}`}/>
+                </ListItem>
+              ))}
+            </List>
 
-        </Box>
-      </Paper>
+          </Box>
+        </Paper>
+      </Box>
     </Box>
   );
 };
