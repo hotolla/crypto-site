@@ -8,8 +8,8 @@ import { Layout } from '@/app/components/Layout';
 import { AuthProvider } from '../app/components/AuthProvider';
 import { SessionProviders } from '@/app/components/SessionProviders';
 import { PrivateRoute } from "@/app/modules/auth";
-import { darkTheme, lightTheme } from "@/app/themes/themes";
-import createEmotionCache from "@/app/themes/createEmotionCache";
+import { darkTheme, lightTheme } from "@/themes/themes";
+import createEmotionCache from "@/themes/createEmotionCache";
 
 
 const clientSideEmotionCache = createEmotionCache();

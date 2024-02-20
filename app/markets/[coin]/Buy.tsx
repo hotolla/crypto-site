@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -9,16 +9,14 @@ import {
   Typography
 } from '@mui/material';
 import { fetchExchangeRates } from '@/api/exchangeRates';
+import { debounce } from 'lodash';
+import { fetchUser } from '@/api/user';
+import { Account, CurrencyCode } from '@/types';
+import { calculateTotalAmount } from '@/helpers/convertBalance';
 
 interface IProps {
   priceUsd: number,
   symbol: string
-}
-
-enum CurrencyCode {
-  USD = 'USD',
-  EUR = 'EUR',
-  PLN = 'PLN',
 }
 
 const currencies = [
@@ -42,14 +40,23 @@ export const Buy = ({ priceUsd, symbol }: IProps) => {
 	const [ exchangeRate, setExchangeRate ] = useState(1);
 	const [ cryptoAmount, setCryptoAmount ] = useState(currencyAmount / priceUsd);
   const [ estimatedPrice, setEstimatedPrice ] = useState(priceUsd);
-  const handleCurrencyAmountChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+  const [userAccounts, setUserAccounts] = useState<Account[]>([]);
+  const [totalBalanceInSelectedCurrency, setTotalBalanceInSelectedCurrency] = useState(0);
 
+  useEffect(() => {
+    fetchUser()
+      .then(({ accounts }) => {
+        setUserAccounts(accounts);
+        updateTotalBalance(accounts, CurrencyCode.USD);
+      });
+  }, []);
+
+  const handleCurrencyAmountChange = useCallback(debounce(({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setCurrencyAmount(+value);
     let buyPrice = priceUsd * exchangeRate;
     setCryptoAmount(+value / buyPrice);
-    console.log(value, priceUsd, exchangeRate);
     setEstimatedPrice(priceUsd * exchangeRate);
-  };
+  }, 300), [priceUsd, exchangeRate]);
 
   const handleCurrencyChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setCurrency(value as CurrencyCode);
@@ -59,13 +66,31 @@ export const Buy = ({ priceUsd, symbol }: IProps) => {
       }
     }).then(({ data }) => {
       setExchangeRate(data[value]);
-      setCryptoAmount((currencyAmount / data[value]) / priceUsd );
+      setCryptoAmount(currencyAmount / (priceUsd * data[value]));
       setEstimatedPrice(priceUsd * data[value]);
     });
   };
 
+  useEffect(() => {
+    if (userAccounts.length > 0) {
+      updateTotalBalance(userAccounts, currency);
+    }
+  }, [userAccounts, currency]);
+
+  const updateTotalBalance = (accounts: Account[], selectedCurrency: CurrencyCode) => {
+    fetchExchangeRates()
+      .then(({ data }) => {
+        const total = calculateTotalAmount(accounts, selectedCurrency, data)
+        setTotalBalanceInSelectedCurrency(total);
+      })
+  };
+
   return (
 		<>
+      <Typography textAlign="center" mt={2}>
+        Total Balance in {currency}: {totalBalanceInSelectedCurrency.toFixed(2)}
+      </Typography>
+
 			<Grid
 				noValidate
 				container
@@ -119,7 +144,7 @@ export const Buy = ({ priceUsd, symbol }: IProps) => {
 						variant="contained"
 						size="large"
 					>
-						Buy
+						Buy {symbol}
 					</Button>
 				</Grid>
 		</Grid>

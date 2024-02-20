@@ -119,7 +119,7 @@ export const Header = ({ isDarkTheme, onThemeToggle }: IProps) => {
                 color="inherit"
                 startIcon={<LoginIcon />}
               >
-                Login to account
+                Login
               </Button>
             </Link>
           )}

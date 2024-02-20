@@ -1,8 +1,8 @@
-import axios, { AxiosRequestConfig } from 'axios';
-import { IUser } from '@/modules/users';
+import { AxiosRequestConfig } from 'axios';
+import { api } from '@/api/api';
 
-export const fetchUser = (id: IUser['id'], config?: AxiosRequestConfig) => {
-  return axios.get(`/user/${id}`, config).then(({ data }) => {
+export const fetchUser = (config?: AxiosRequestConfig) => {
+  return api.get('/user', config).then(({ data }) => {
     return data;
   });
 };

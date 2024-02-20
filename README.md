@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Crypto exchange](images/cryptoScreen.png)
+Crypto Exchange Platform
+Welcome to the Crypto Exchange Platform, a cutting-edge web application designed for cryptocurrency enthusiasts and traders. Built on Next.js for seamless server-side rendering and optimal user experience, our platform offers real-time currency charts, buying and selling functionalities, live chat support using Socket.IO, and a secure user authentication system. With a robust backend powered by Node.js, we ensure fast, secure, and reliable service.
 
-## Getting Started
+Features
+Real-Time Currency Charts: Stay updated with the latest trends in cryptocurrency through our real-time currency charts. Make informed decisions with up-to-date data visualizations.
+Buy and Sell Cryptocurrency: Our platform supports seamless transactions, allowing users to buy and sell cryptocurrencies with ease.
+Live Chat Support: Have questions or need assistance? Our live chat feature, powered by Socket.IO, ensures you're always connected and can receive prompt support.
+User Authentication: Secure login and registration process with email and password. Protect your account and transactions with our robust authentication system.
+Responsive Design: Whether you're trading on a desktop or on the go with your mobile device, our platform's responsive design adapts to your screen size for optimal viewing and interaction.
+Getting Started
+To get started with the Crypto Exchange Platform, follow these installation steps.
 
-First, run the development server:
-
-```bash
+Prerequisites
+Node.js (LTS version recommended)
+npm or yarn
+Installation
+Clone the repository:
+bash
+Copy code
+git clone https://github.com/hotolla/crypto-site
+Navigate to the project directory:
+bash
+Copy code
+cd crypto-exchange-platform
+Install dependencies:
+bash
+Copy code
+npm install
+# or
+yarn install
+Run the development server:
+bash
+Copy code
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open http://localhost:3000 with your browser to see the result.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Technologies Used
+Next.js: Frontend framework for React, providing server-side rendering and generating static websites.
+Node.js: JavaScript runtime built on Chrome's V8 JavaScript engine, used for building the backend.
+Socket.IO: Enables real-time, bidirectional, and event-based communication between web clients and servers.
+Other Libraries: Various other libraries and tools are used for UI components, state management, styling, and more.
