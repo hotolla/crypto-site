@@ -1,10 +1,11 @@
 ![Crypto exchange](images/cryptoScreen.png)
 ![Crypto exchange](images/cryptoScreen2.png)
+![Crypto exchange](images/cryptoScreen3.png)
 
 Crypto Exchange Platform a cutting-edge web application designed 
-for cryptocurrency enthusiasts and traders. Built on Next.js 
+for cryptocurrency enthusiasts and traders.
 
-for seamless server-side rendering and optimal user experience,
+Built on Next.js or seamless server-side rendering and optimal user experience,
 our platform offers real-time currency charts, buying and selling functionalities,
 live chat support using Socket.IO and a secure user authentication system. 
 With a robust backend powered by Node.js, we ensure fast, secure, and reliable service.
